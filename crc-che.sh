@@ -7,6 +7,7 @@ init() {
   CPUS=5
   RAM_MEMORY=16000
 }
+
 installCRCLocally() {
   sudo systemctl start libvirtd
   crc start --cpus=${CPUS} --memory=${RAM_MEMORY} --pull-secret-file=${SecretFile}
