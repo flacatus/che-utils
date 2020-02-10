@@ -1,17 +1,23 @@
 #!/bin/bash
 
-getKubeadminPassword() {
+set -e -x
+
+init() {
+  SecretFile=~/.crc/pull-secret
+  CPUS=5
+  RAM_MEMORY=16000
+}
+installCRCLocally() {
+  sudo systemctl start libvirtd
+  crc start --cpus=${CPUS} --memory=${RAM_MEMORY} --pull-secret-file=${SecretFile}
+}
+
+getKubeAdminPassword() {
   cat ~/.crc/cache/*/kubeadmin-password
 }
 
-set -x
-set -e
+init
+installCRCLocally
 
-sudo systemctl start libvirtd
-sleep 1
-crc start --memory 12288 --pull-secret-file ~/.crc/pull-secret
-sleep 3
 eval $( crc oc-env )
-sleep 3
 oc login -u kubeadmin -p $( getKubeadminPassword ) https://api.crc.testing:6443
-
