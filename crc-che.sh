@@ -3,7 +3,7 @@
 set -e -x
 
 init() {
-  SecretFile=~/.crc/pull-secret
+  SecretFile=/home/flaxius/Documents/crc-credentials/pull-secret
   CPUS=5
   RAM_MEMORY=16000
 }
