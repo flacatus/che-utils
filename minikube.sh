@@ -12,4 +12,4 @@ else
 	MEMORY=${1}
 fi
 
-minikube start --memory=${MEMORY}
+minikube start --memory=${MEMORY} --vm--driver=kvm
